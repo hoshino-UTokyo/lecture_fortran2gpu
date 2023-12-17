@@ -1,0 +1,295 @@
+module cuda_ker
+  use cudafor
+  implicit none
+  public mat_ass_main_cuda
+
+contains
+
+! The number of threads must be 64
+  attributes(global) subroutine mat_ass_main_cuda_kernel                                &
+       (str,N,ICELTOT,NP,NPU,NPL,DX,DY,DZ,valA,valB,valX,ELMCOLORitem,ICELNOD,OLDtoNEW, &
+       indexU,itemU,indexL,itemL,PNQ,PNE,PNT,WEI,AU,AL,D)
+    
+    integer,intent(in),value :: str,N,ICELTOT,NP,NPU,NPL
+    real(8),intent(in),value :: DX,DY,DZ,valA,valB,valX
+    integer,intent(in) :: ELMCOLORitem(ICELTOT),ICELNOD(ICELTOT,8),OLDtoNEW(NP)
+    integer,intent(in) :: indexU(0:NP),itemU(NPU),indexL(0:NP),itemL(NPL)
+    real(8),intent(in) :: PNQ(8,2,2),PNE(8,2,2),PNT(8,2,2),WEI(2)
+    real(8),intent(out) :: AU(9*NPU),AL(9*NPL),D(9*NP)
+    real(8),shared,dimension(2,2,2) :: DETJ
+    real(8),shared,dimension(8,2,2,2) :: PNX,PNY,PNZ
+    integer,shared,dimension(8) :: nodLOCAL
+    integer :: tx,bx,t1,t2,t3,t4,t5,istat
+    real(8) :: X,Y,Z,pnqt,pnet,pntt
+    integer :: icel0,icel,in0,in,ip,jp,kp,iDlu,ie,je,k,kk,iiS,iiE,ipn,jpn,kpn,iip,jjp
+    real(8) :: dXdQ,dYdQ,dZdQ,dXdE,dYdE,dZdE,dXdT,dYdT,dZdT
+    real(8) :: coef,a11,a12,a13,a21,a22,a23,a31,a32,a33
+    real(8) :: PNXi,PNYi,PNZi,PNXj,PNYj,PNZj
+    real(8),shared,dimension(9,8,8) :: aa
+
+    tx = threadidx%x
+    bx = blockidx%x
+
+    t1 = iand(tx-1,7)+1
+    t2 = iand(ishft(tx-1,-3),1)+1
+    t3 = iand(ishft(tx-1,-4),1)+1
+    t4 = iand(ishft(tx-1,-5),1)+1
+    t5 = ishft(tx-1,-3)+1
+
+
+    icel0 = bx + str -1
+
+!    icel= ELMCOLORitem(icel0)
+
+    in0 = ICELNOD(icel0,t1)
+    in  = OLDtoNEW(in0)
+    nodLOCAL(t1)= in
+
+    
+    if(t1 == 1 .or. t1 == 4 .or. t1 == 5 .or. t1 == 8) then
+       X = 0.0d0
+    else
+       X = DX
+    end if
+    if(t1 == 1 .or. t1 == 2 .or. t1 == 5 .or. t1 == 6) then
+       Y = 0.0d0
+    else
+       Y = DY
+    end if
+    if(t1 == 1 .or. t1 == 2 .or. t1 == 3 .or. t1 == 4) then
+       Z = 0.0d0
+    else
+       Z = DZ
+    end if
+
+    ip = t2
+    jp = t3
+    kp = t4
+
+    PNX(t1,ip,jp,kp)=0.d0
+    PNY(t1,ip,jp,kp)=0.d0
+    PNZ(t1,ip,jp,kp)=0.d0
+
+    pnqt = PNQ(t1,jp,kp)
+    dXdQ = pnqt * X
+    dYdQ = pnqt * Y
+    dZdQ = pnqt * Z
+    pnet = PNE(t1,ip,kp)
+    dXdE = pnet * X
+    dYdE = pnet * Y
+    dZdE = pnet * Z
+    pntt = PNT(t1,ip,jp)
+    dXdT = pntt * X
+    dYdT = pntt * Y
+    dZdT = pntt * Z
+
+    
+    call syncthreads()
+    dXdQ = dXdQ + __shfl_xor(dXdQ,4)
+    dXdQ = dXdQ + __shfl_xor(dXdQ,2)
+    dXdQ = dXdQ + __shfl_xor(dXdQ,1)
+    dYdQ = dYdQ + __shfl_xor(dYdQ,4)
+    dYdQ = dYdQ + __shfl_xor(dYdQ,2)
+    dYdQ = dYdQ + __shfl_xor(dYdQ,1)
+    dZdQ = dZdQ + __shfl_xor(dZdQ,4)
+    dZdQ = dZdQ + __shfl_xor(dZdQ,2)
+    dZdQ = dZdQ + __shfl_xor(dZdQ,1)
+    dXdE = dXdE + __shfl_xor(dXdE,4)
+    dXdE = dXdE + __shfl_xor(dXdE,2)
+    dXdE = dXdE + __shfl_xor(dXdE,1)
+    dYdE = dYdE + __shfl_xor(dYdE,4)
+    dYdE = dYdE + __shfl_xor(dYdE,2)
+    dYdE = dYdE + __shfl_xor(dYdE,1)
+    dZdE = dZdE + __shfl_xor(dZdE,4)
+    dZdE = dZdE + __shfl_xor(dZdE,2)
+    dZdE = dZdE + __shfl_xor(dZdE,1)
+    dXdT = dXdT + __shfl_xor(dXdT,4)
+    dXdT = dXdT + __shfl_xor(dXdT,2)
+    dXdT = dXdT + __shfl_xor(dXdT,1)
+    dYdT = dYdT + __shfl_xor(dYdT,4)
+    dYdT = dYdT + __shfl_xor(dYdT,2)
+    dYdT = dYdT + __shfl_xor(dYdT,1)
+    dZdT = dZdT + __shfl_xor(dZdT,4)
+    dZdT = dZdT + __shfl_xor(dZdT,2)
+    dZdT = dZdT + __shfl_xor(dZdT,1)
+    call syncthreads()
+
+    DETJ(ip,jp,kp)=                       &
+         dXdQ*(dYdE*dZdT-dZdE*dYdT) +     &
+         dYdQ*(dZdE*dXdT-dXdE*dZdT) +     &
+         dZdQ*(dXdE*dYdT-dYdE*dXdT)
+
+    call syncthreads()
+    coef= 1.d0 / DETJ(ip,jp,kp)
+    a11= coef * ( dYdE*dZdT - dZdE*dYdT )
+    a12= coef * ( dZdQ*dYdT - dYdQ*dZdT )
+    a13= coef * ( dYdQ*dZdE - dZdQ*dYdE )
+    
+    a21= coef * ( dZdE*dXdT - dXdE*dZdT )
+    a22= coef * ( dXdQ*dZdT - dZdQ*dXdT )
+    a23= coef * ( dZdQ*dXdE - dXdQ*dZdE )
+    
+    a31= coef * ( dXdE*dYdT - dYdE*dXdT )
+    a32= coef * ( dYdQ*dXdT - dXdQ*dYdT )
+    a33= coef * ( dXdQ*dYdE - dYdQ*dXdE )
+    
+    call syncthreads()
+    DETJ(ip,jp,kp)= dabs(DETJ(ip,jp,kp))
+
+    PNX(t1,ip,jp,kp)= a11*pnqt + a12*pnet + a13*pntt
+    PNY(t1,ip,jp,kp)= a21*pnqt + a22*pnet + a23*pntt
+    PNZ(t1,ip,jp,kp)= a31*pnqt + a32*pnet + a33*pntt
+
+    call syncthreads()
+
+    ie = t5
+    je = t1
+
+    ip = nodLOCAL(ie)
+    if (ip.le.N) then
+       jp = nodLOCAL(je)
+
+       IDlu= 0
+       if (ip.eq.jp) IDlu= 0
+       
+       kk= 0
+       iiS= indexU(ip-1) + 1
+       iiE= indexU(ip  )
+       do k= iiS, iiE
+          if ( itemU(k).eq.jp ) then
+             kk  = k
+             IDlu= 1
+             exit
+          endif
+       enddo
+
+    
+       
+       if (kk.eq.0) then
+          iiS= indexL(ip-1) + 1
+          iiE= indexL(ip  )
+
+          do k= iiS, iiE
+             if ( itemL(k).eq.jp) then
+                kk= k
+                IDlu= -1
+             endif
+          enddo
+       endif
+
+       PNXi= 0.d0
+       PNYi= 0.d0
+       PNZi= 0.d0
+       PNXj= 0.d0
+       PNYj= 0.d0
+       PNZj= 0.d0
+       
+       a11= 0.d0
+       a21= 0.d0
+       a31= 0.d0
+       a12= 0.d0
+       a22= 0.d0
+       a32= 0.d0
+       a13= 0.d0
+       a23= 0.d0
+       a33= 0.d0
+       do kpn= 1, 2
+          do jpn= 1, 2
+             do ipn= 1, 2
+                coef= DETJ(ipn,jpn,kpn)*WEI(ipn)*WEI(jpn)*WEI(kpn)
+
+                PNXi= PNX(ie,ipn,jpn,kpn)
+                PNYi= PNY(ie,ipn,jpn,kpn)
+                PNZi= PNZ(ie,ipn,jpn,kpn)
+
+                PNXj= PNX(je,ipn,jpn,kpn)
+                PNYj= PNY(je,ipn,jpn,kpn)
+                PNZj= PNZ(je,ipn,jpn,kpn)
+
+                a11= a11 + (valX*PNXi*PNXj+valB*(PNYi*PNYj+PNZi*PNZj))*coef
+                a22= a22 + (valX*PNYi*PNYj+valB*(PNZi*PNZj+PNXi*PNXj))*coef
+                a33= a33 + (valX*PNZi*PNZj+valB*(PNXi*PNXj+PNYi*PNYj))*coef
+
+                a12= a12 + (valA*PNXi*PNYj + valB*PNXj*PNYi)*coef
+                a13= a13 + (valA*PNXi*PNZj + valB*PNXj*PNZi)*coef
+                a21= a21 + (valA*PNYi*PNXj + valB*PNYj*PNXi)*coef
+                a23= a23 + (valA*PNYi*PNZj + valB*PNYj*PNZi)*coef
+                a31= a31 + (valA*PNZi*PNXj + valB*PNZj*PNXi)*coef
+                a32= a32 + (valA*PNZi*PNYj + valB*PNZj*PNYi)*coef
+             enddo
+          enddo
+       enddo
+
+       if (IDlu.eq.1) then
+          istat = atomicadd(AU(9*kk-8),a11)
+          istat = atomicadd(AU(9*kk-7),a12)
+          istat = atomicadd(AU(9*kk-6),a13)
+          istat = atomicadd(AU(9*kk-5),a21)
+          istat = atomicadd(AU(9*kk-4),a22)
+          istat = atomicadd(AU(9*kk-3),a23)
+          istat = atomicadd(AU(9*kk-2),a31)
+          istat = atomicadd(AU(9*kk-1),a32)
+          istat = atomicadd(AU(9*kk  ),a33)
+       endif
+
+       if (IDlu.eq.-1) then
+          istat = atomicadd(AL(9*kk-8),a11)
+          istat = atomicadd(AL(9*kk-7),a12)
+          istat = atomicadd(AL(9*kk-6),a13)
+          istat = atomicadd(AL(9*kk-5),a21)
+          istat = atomicadd(AL(9*kk-4),a22)
+          istat = atomicadd(AL(9*kk-3),a23)
+          istat = atomicadd(AL(9*kk-2),a31)
+          istat = atomicadd(AL(9*kk-1),a32)
+          istat = atomicadd(AL(9*kk  ),a33)
+       end if
+
+       if (IDlu.eq.0) then
+          istat = atomicadd(D(9*ip-8),a11)
+          istat = atomicadd(D(9*ip-7),a12)
+          istat = atomicadd(D(9*ip-6),a13)
+          istat = atomicadd(D(9*ip-5),a21)
+          istat = atomicadd(D(9*ip-4),a22)
+          istat = atomicadd(D(9*ip-3),a23)
+          istat = atomicadd(D(9*ip-2),a31)
+          istat = atomicadd(D(9*ip-1),a32)
+          istat = atomicadd(D(9*ip  ),a33)
+       end if
+    end if
+!     ! !    if(bx == 1) print *, tx,t1,t2,t3,t4,t5
+!     ! !    if(bx == 1) print *, tx,ie,je
+!     !     ! if(bx == 1) print *, tx,nodLOCAL(ie),nodLOCAL(je),ip
+!     !     ! if(ie <= 0 .or. ie > 8) print *, "error", bx, tx, ie
+!     print *, bx,tx,pnqt,pnet,pntt
+!     return
+! #if 0
+! #endif
+
+  end subroutine mat_ass_main_cuda_kernel
+
+  subroutine mat_ass_main_cuda                                                      &
+       (str,end,N,ICELTOT,NP,NPU,NPL,DX,DY,DZ,valA,valB,valX,ELMCOLORitem,ICELNOD,OLDtoNEW, &
+       indexU,itemU,indexL,itemL,PNQ,PNE,PNT,WEI,AU,AL,D)
+    
+    integer,intent(in) :: str,end,N,ICELTOT,NP,NPU,NPL
+    real(8),intent(in) :: DX,DY,DZ,valA,valB,valX
+    integer,intent(in),managed :: ELMCOLORitem(ICELTOT),ICELNOD(ICELTOT,8),OLDtoNEW(NP)
+    integer,intent(in),managed :: indexU(0:NP),itemU(NPU),indexL(0:NP),itemL(NPL)
+    real(8),intent(in),managed :: PNQ(8,2,2),PNE(8,2,2),PNT(8,2,2),WEI(2)
+    real(8),intent(out),managed :: AU(9*NPU),AL(9*NPL),D(9*NP)
+    type(dim3) :: dimGrid, dimBlock
+    integer :: istat
+
+!    print *, "cuda start", __LINE__
+    print *, str,end,end-str+1
+    dimGrid = dim3(end-str+1,1,1)
+    dimBlock = dim3(64,1,1)
+    call mat_ass_main_cuda_kernel <<<dimGrid, dimBlock>>>                               &
+       (str,N,ICELTOT,NP,NPU,NPL,DX,DY,DZ,valA,valB,valX,ELMCOLORitem,ICELNOD,OLDtoNEW, &
+       indexU,itemU,indexL,itemL,PNQ,PNE,PNT,WEI,AU,AL,D)
+    istat = cudaDeviceSynchronize()
+!    print *, "cuda stop", __LINE__
+    
+  end subroutine mat_ass_main_cuda
+
+end module cuda_ker

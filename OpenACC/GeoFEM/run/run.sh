@@ -1,17 +1,17 @@
 #!/bin/bash -x                                                                                                            
-#PJM -g gz00
-#PJM -L rscgrp=regular-a
-#PJM -L node=1
+#PJM -g gt00
+#PJM -L rscgrp=lecture-a
+#PJM -L gpu=1
 #PJM --mpi proc=1
-#PJM -L elapse=01:00:00                                                                                                   
-
+#PJM -L elapse=00:10:00                                                                                                   
 module purge
-module load nvidia cuda ompi-cuda                                                                                   
+module load nvidia nvmpi
 
-BIN=01_naive
+export NVIDIA_ACC_TIME=1
 
-NP=${3:-${PJM_MPI_PROC}}
-NPNODE=$(( ${NP} / ${PJM_VNODE} ))
-mpiexec -np ${NP} -npernode ${NPNODE} ./wrap-aquarius.sh ./${BIN} 
-
+for exe in ACC_U_f_a 
+do
+    echo ${exe}
+    mpiexec -np ${PJM_MPI_PROC} ./wrapper.sh ./${exe}
+done
 

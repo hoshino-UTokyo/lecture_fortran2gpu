@@ -1,0 +1,230 @@
++ module purge
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ for _mlv in ${MODULES_RUN_QUARANTINE:-}
++ '[' LD_LIBRARY_PATH = LD_LIBRARY_PATH -a LD_LIBRARY_PATH = LD_LIBRARY_PATH ']'
+++ eval 'echo ${LD_LIBRARY_PATH+x}'
++++ echo
++ '[' -n '' ']'
++ _mlrv=MODULES_RUNENV_LD_LIBRARY_PATH
+++ eval 'echo ${MODULES_RUNENV_LD_LIBRARY_PATH:-}'
++++ echo
++ _mlre='LD_LIBRARY_PATH='\'''\'' '
++ for _mlv in ${MODULES_RUN_QUARANTINE:-}
++ '[' LD_PRELOAD = LD_PRELOAD -a LD_PRELOAD = LD_PRELOAD ']'
+++ eval 'echo ${LD_PRELOAD+x}'
++++ echo
++ '[' -n '' ']'
++ _mlrv=MODULES_RUNENV_LD_PRELOAD
+++ eval 'echo ${MODULES_RUNENV_LD_PRELOAD:-}'
++++ echo
++ _mlre='LD_LIBRARY_PATH='\'''\'' LD_PRELOAD='\'''\'' '
++ '[' -n 'LD_LIBRARY_PATH='\'''\'' LD_PRELOAD='\'''\'' ' ']'
+++ eval 'LD_LIBRARY_PATH='\'''\''' 'LD_PRELOAD='\'''\''' /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'
++++ LD_LIBRARY_PATH=
++++ LD_PRELOAD=
++++ /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash purge
++ eval
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
++ module load nvidia cuda ompi-cuda
++ unset _mlshdbg
++ '[' 0 = 1 ']'
++ unset _mlre _mlIFS
++ '[' -n x ']'
++ _mlIFS=' 	
+'
++ IFS=' '
++ for _mlv in ${MODULES_RUN_QUARANTINE:-}
++ '[' LD_LIBRARY_PATH = LD_LIBRARY_PATH -a LD_LIBRARY_PATH = LD_LIBRARY_PATH ']'
+++ eval 'echo ${LD_LIBRARY_PATH+x}'
++++ echo
++ '[' -n '' ']'
++ _mlrv=MODULES_RUNENV_LD_LIBRARY_PATH
+++ eval 'echo ${MODULES_RUNENV_LD_LIBRARY_PATH:-}'
++++ echo
++ _mlre='LD_LIBRARY_PATH='\'''\'' '
++ for _mlv in ${MODULES_RUN_QUARANTINE:-}
++ '[' LD_PRELOAD = LD_PRELOAD -a LD_PRELOAD = LD_PRELOAD ']'
+++ eval 'echo ${LD_PRELOAD+x}'
++++ echo
++ '[' -n '' ']'
++ _mlrv=MODULES_RUNENV_LD_PRELOAD
+++ eval 'echo ${MODULES_RUNENV_LD_PRELOAD:-}'
++++ echo
++ _mlre='LD_LIBRARY_PATH='\'''\'' LD_PRELOAD='\'''\'' '
++ '[' -n 'LD_LIBRARY_PATH='\'''\'' LD_PRELOAD='\'''\'' ' ']'
+++ eval 'LD_LIBRARY_PATH='\'''\''' 'LD_PRELOAD='\'''\''' /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash '"$@"'
++++ LD_LIBRARY_PATH=
++++ LD_PRELOAD=
++++ /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash load nvidia cuda ompi-cuda
++ eval 'CPATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include:/work/opt/local/x86_64/cores/cuda/11.4/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/include;' export 'CPATH;
+MODULES_LMALTNAME_modshare=nvidia/22.7\&nvidia/default\&nvidia:1:cuda/11.4\&cuda/default\&cuda:1;' export 'MODULES_LMALTNAME_modshare;
+OMPI_MCA_plm_rsh_agent=/bin/pjrsh;' export 'OMPI_MCA_plm_rsh_agent;
+WISTERIA_CUDA_VER=11.4;' export 'WISTERIA_CUDA_VER;
+C_INCLUDE_PATH=/work/opt/local/x86_64/cores/cuda/11.4/include;' export 'C_INCLUDE_PATH;
+F77=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran;' export 'F77;
+NVHPC=/work/opt/local/x86_64/cores/nvidia/22.7;' export 'NVHPC;
+WISTERIA_CORE_NAME=nvidia;' export 'WISTERIA_CORE_NAME;
+MANPATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/share/man:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:/usr/local/share/man:/usr/share/man:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:/usr/local/share/man:/usr/share/man;' export 'MANPATH;
+WISTERIA_MPI_VER=4.1.4-11.4;' export 'WISTERIA_MPI_VER;
+CPP=cpp;' export 'CPP;
+MANPATH_modshare=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/share/man:1:/usr/local/share/man:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:1:/usr/share/man:1;' export 'MANPATH_modshare;
+C_INCLUDE_PATH_modshare=/work/opt/local/x86_64/cores/cuda/11.4/include:1;' export 'C_INCLUDE_PATH_modshare;
+WISTERIA_CUDA_NAME=cuda;' export 'WISTERIA_CUDA_NAME;
+F90=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran;' export 'F90;
+LD_LIBRARY_PATH_modshare=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/extras/CUPTI/lib64:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/lib:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/lib:1:/work/opt/local/x86_64/cores/cuda/11.4/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/lib:1;' export 'LD_LIBRARY_PATH_modshare;
+MODULES_LMPREREQ_modshare=ompi-cuda/4.1.4-11.4\&cuda/11.4:1;' export 'MODULES_LMPREREQ_modshare;
+MODULEPATH=/work/opt/local/modules/modulefiles/WA/aquarius/mpi/nvidia/22.7/ompi-cuda/4.1.4-11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/cuda/11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7:/etc/scl/modulefiles:/work/opt/local/modules/modulefiles/WA/util:/work/opt/local/modules/modulefiles/WA/aquarius/util:/work/opt/local/modules/modulefiles/WA/aquarius/core:/work/opt/local/modules/modulefiles/WA/development;' export 'MODULEPATH;
+PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/bin:/work/opt/local/x86_64/cores/cuda/11.4/nsight-systems-2021.3.2:/work/opt/local/x86_64/cores/cuda/11.4/nsight-compute-2021.2.2:/work/opt/local/x86_64/cores/cuda/11.4/bin:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/bin:/pjmhome/.local/bin:/pjmhome/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin;' export 'PATH;
+CUDA_HOME=/work/opt/local/x86_64/cores/cuda/11.4;' export 'CUDA_HOME;
+CC=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvc;' export 'CC;
+LD_LIBRARY_PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:/work/opt/local/x86_64/cores/cuda/11.4/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/extras/CUPTI/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/lib64;' export 'LD_LIBRARY_PATH;
+MODULES_LMPREREQ=ompi-cuda/4.1.4-11.4\&cuda/11.4;' export 'MODULES_LMPREREQ;
+LOADEDMODULES=nvidia/22.7:cuda/11.4:ompi-cuda/4.1.4-11.4;' export 'LOADEDMODULES;
+CXX=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvc++;' export 'CXX;
+MODULES_LMCONFLICT=nvidia/22.7\&nvidia:cuda/11.4\&cuda:ompi-cuda/4.1.4-11.4\&fjmpi\&impi\&mvapich2\&mpich\&ompi\&ompi-cuda\&nvmpi\&hpcx\&hpcx-debug\&hpcx-mt\&hpcx-prof;' export 'MODULES_LMCONFLICT;
+CUDA_DIR=/work/opt/local/x86_64/cores/cuda/11.4;' export 'CUDA_DIR;
+WISTERIA_CORE_VER=22.7;' export 'WISTERIA_CORE_VER;
+WISTERIA_MPI_NAME=ompi-cuda;' export 'WISTERIA_MPI_NAME;
+CUDA_TOP=/work/opt/local/x86_64/cores/cuda/11.4;' export 'CUDA_TOP;
+LOADEDMODULES_modshare=ompi-cuda/4.1.4-11.4:1:cuda/11.4:1:nvidia/22.7:1;' export 'LOADEDMODULES_modshare;
+MODULEPATH_modshare=/work/opt/local/modules/modulefiles/WA/aquarius/compiler/cuda/11.4:1:/etc/scl/modulefiles:1:/work/opt/local/modules/modulefiles/WA/aquarius/util:1:/work/opt/local/modules/modulefiles/WA/aquarius/mpi/nvidia/22.7/ompi-cuda/4.1.4-11.4:1:/work/opt/local/modules/modulefiles/WA/util:1:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7:1:/work/opt/local/modules/modulefiles/WA/aquarius/core:1:/work/opt/local/modules/modulefiles/WA/development:1;' export 'MODULEPATH_modshare;
+OMPI_INC=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include;' export 'OMPI_INC;
+LIBRARY_PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:/work/opt/local/x86_64/cores/cuda/11.4/lib64;' export 'LIBRARY_PATH;
+_LMFILES_=/work/opt/local/modules/modulefiles/WA/aquarius/core/nvidia/22.7:/work/opt/local/modules/modulefiles/WA/aquarius/core/cuda/11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7/ompi-cuda/4.1.4-11.4;' export '_LMFILES_;
+MODULES_LMALTNAME=nvidia/22.7\&nvidia/default\&nvidia:cuda/11.4\&cuda/default\&cuda;' export 'MODULES_LMALTNAME;
+LIBRARY_PATH_modshare=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:1:/work/opt/local/x86_64/cores/cuda/11.4/lib64:1;' export 'LIBRARY_PATH_modshare;
+NVHPC_CUDA_HOME=/work/opt/local/x86_64/cores/cuda/11.4;' export 'NVHPC_CUDA_HOME;
+OMPI_LIB=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib;' export 'OMPI_LIB;
+MODULES_LMCONFLICT_modshare=nvidia/22.7\&nvidia:1:ompi-cuda/4.1.4-11.4\&fjmpi\&impi\&mvapich2\&mpich\&ompi\&ompi-cuda\&nvmpi\&hpcx\&hpcx-debug\&hpcx-mt\&hpcx-prof:1:cuda/11.4\&cuda:1;' export 'MODULES_LMCONFLICT_modshare;
+OMPI_HOME=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4;' export 'OMPI_HOME;
+CUDA_INSTALL_PATH=/work/opt/local/x86_64/cores/cuda/11.4;' export 'CUDA_INSTALL_PATH;
+FC=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran;' export 'FC;
+CUDA_PATH=/work/opt/local/x86_64/cores/cuda/11.4;' export 'CUDA_PATH;
+CPATH_modshare=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/include:1:/work/opt/local/x86_64/cores/cuda/11.4/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/include:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/include:1;' export 'CPATH_modshare;
+OMPI_DIR=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4;' export 'OMPI_DIR;
+_LMFILES__modshare=/work/opt/local/modules/modulefiles/WA/aquarius/core/nvidia/22.7:1:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7/ompi-cuda/4.1.4-11.4:1:/work/opt/local/modules/modulefiles/WA/aquarius/core/cuda/11.4:1;' export '_LMFILES__modshare;
+PATH_modshare=/usr/bin:1:/work/opt/local/x86_64/cores/cuda/11.4/nsight-systems-2021.3.2:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/bin:1:/usr/share/Modules/bin:1:/usr/local/bin:1:/work/opt/local/x86_64/cores/cuda/11.4/nsight-compute-2021.2.2:1:/pjmhome/.local/bin:1:/pjmhome/bin:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin:1:/usr/sbin:1:/work/opt/local/x86_64/cores/cuda/11.4/bin:1:/usr/local/sbin:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/bin:1;' export 'PATH_modshare;
+test' '0;'
+++ CPATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include:/work/opt/local/x86_64/cores/cuda/11.4/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/include:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/include
+++ export CPATH
+++ MODULES_LMALTNAME_modshare='nvidia/22.7&nvidia/default&nvidia:1:cuda/11.4&cuda/default&cuda:1'
+++ export MODULES_LMALTNAME_modshare
+++ OMPI_MCA_plm_rsh_agent=/bin/pjrsh
+++ export OMPI_MCA_plm_rsh_agent
+++ WISTERIA_CUDA_VER=11.4
+++ export WISTERIA_CUDA_VER
+++ C_INCLUDE_PATH=/work/opt/local/x86_64/cores/cuda/11.4/include
+++ export C_INCLUDE_PATH
+++ F77=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran
+++ export F77
+++ NVHPC=/work/opt/local/x86_64/cores/nvidia/22.7
+++ export NVHPC
+++ WISTERIA_CORE_NAME=nvidia
+++ export WISTERIA_CORE_NAME
+++ MANPATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/share/man:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:/usr/local/share/man:/usr/share/man:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:/usr/local/share/man:/usr/share/man
+++ export MANPATH
+++ WISTERIA_MPI_VER=4.1.4-11.4
+++ export WISTERIA_MPI_VER
+++ CPP=cpp
+++ export CPP
+++ MANPATH_modshare=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/share/man:1:/usr/local/share/man:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/man:1:/usr/share/man:1
+++ export MANPATH_modshare
+++ C_INCLUDE_PATH_modshare=/work/opt/local/x86_64/cores/cuda/11.4/include:1
+++ export C_INCLUDE_PATH_modshare
+++ WISTERIA_CUDA_NAME=cuda
+++ export WISTERIA_CUDA_NAME
+++ F90=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran
+++ export F90
+++ LD_LIBRARY_PATH_modshare=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/extras/CUPTI/lib64:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/lib:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/lib:1:/work/opt/local/x86_64/cores/cuda/11.4/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/lib64:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/lib:1
+++ export LD_LIBRARY_PATH_modshare
+++ MODULES_LMPREREQ_modshare='ompi-cuda/4.1.4-11.4&cuda/11.4:1'
+++ export MODULES_LMPREREQ_modshare
+++ MODULEPATH=/work/opt/local/modules/modulefiles/WA/aquarius/mpi/nvidia/22.7/ompi-cuda/4.1.4-11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/cuda/11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7:/etc/scl/modulefiles:/work/opt/local/modules/modulefiles/WA/util:/work/opt/local/modules/modulefiles/WA/aquarius/util:/work/opt/local/modules/modulefiles/WA/aquarius/core:/work/opt/local/modules/modulefiles/WA/development
+++ export MODULEPATH
+++ PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/bin:/work/opt/local/x86_64/cores/cuda/11.4/nsight-systems-2021.3.2:/work/opt/local/x86_64/cores/cuda/11.4/nsight-compute-2021.2.2:/work/opt/local/x86_64/cores/cuda/11.4/bin:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/bin:/pjmhome/.local/bin:/pjmhome/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+++ export PATH
+++ CUDA_HOME=/work/opt/local/x86_64/cores/cuda/11.4
+++ export CUDA_HOME
+++ CC=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvc
+++ export CC
+++ LD_LIBRARY_PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:/work/opt/local/x86_64/cores/cuda/11.4/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/lib:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/extras/CUPTI/lib64:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/lib64
+++ export LD_LIBRARY_PATH
+++ MODULES_LMPREREQ='ompi-cuda/4.1.4-11.4&cuda/11.4'
+++ export MODULES_LMPREREQ
+++ LOADEDMODULES=nvidia/22.7:cuda/11.4:ompi-cuda/4.1.4-11.4
+++ export LOADEDMODULES
+++ CXX=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvc++
+++ export CXX
+++ MODULES_LMCONFLICT='nvidia/22.7&nvidia:cuda/11.4&cuda:ompi-cuda/4.1.4-11.4&fjmpi&impi&mvapich2&mpich&ompi&ompi-cuda&nvmpi&hpcx&hpcx-debug&hpcx-mt&hpcx-prof'
+++ export MODULES_LMCONFLICT
+++ CUDA_DIR=/work/opt/local/x86_64/cores/cuda/11.4
+++ export CUDA_DIR
+++ WISTERIA_CORE_VER=22.7
+++ export WISTERIA_CORE_VER
+++ WISTERIA_MPI_NAME=ompi-cuda
+++ export WISTERIA_MPI_NAME
+++ CUDA_TOP=/work/opt/local/x86_64/cores/cuda/11.4
+++ export CUDA_TOP
+++ LOADEDMODULES_modshare=ompi-cuda/4.1.4-11.4:1:cuda/11.4:1:nvidia/22.7:1
+++ export LOADEDMODULES_modshare
+++ MODULEPATH_modshare=/work/opt/local/modules/modulefiles/WA/aquarius/compiler/cuda/11.4:1:/etc/scl/modulefiles:1:/work/opt/local/modules/modulefiles/WA/aquarius/util:1:/work/opt/local/modules/modulefiles/WA/aquarius/mpi/nvidia/22.7/ompi-cuda/4.1.4-11.4:1:/work/opt/local/modules/modulefiles/WA/util:1:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7:1:/work/opt/local/modules/modulefiles/WA/aquarius/core:1:/work/opt/local/modules/modulefiles/WA/development:1
+++ export MODULEPATH_modshare
+++ OMPI_INC=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include
+++ export OMPI_INC
+++ LIBRARY_PATH=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:/work/opt/local/x86_64/cores/cuda/11.4/lib64
+++ export LIBRARY_PATH
+++ _LMFILES_=/work/opt/local/modules/modulefiles/WA/aquarius/core/nvidia/22.7:/work/opt/local/modules/modulefiles/WA/aquarius/core/cuda/11.4:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7/ompi-cuda/4.1.4-11.4
+++ export _LMFILES_
+++ MODULES_LMALTNAME='nvidia/22.7&nvidia/default&nvidia:cuda/11.4&cuda/default&cuda'
+++ export MODULES_LMALTNAME
+++ LIBRARY_PATH_modshare=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib:1:/work/opt/local/x86_64/cores/cuda/11.4/lib64:1
+++ export LIBRARY_PATH_modshare
+++ NVHPC_CUDA_HOME=/work/opt/local/x86_64/cores/cuda/11.4
+++ export NVHPC_CUDA_HOME
+++ OMPI_LIB=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/lib
+++ export OMPI_LIB
+++ MODULES_LMCONFLICT_modshare='nvidia/22.7&nvidia:1:ompi-cuda/4.1.4-11.4&fjmpi&impi&mvapich2&mpich&ompi&ompi-cuda&nvmpi&hpcx&hpcx-debug&hpcx-mt&hpcx-prof:1:cuda/11.4&cuda:1'
+++ export MODULES_LMCONFLICT_modshare
+++ OMPI_HOME=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4
+++ export OMPI_HOME
+++ CUDA_INSTALL_PATH=/work/opt/local/x86_64/cores/cuda/11.4
+++ export CUDA_INSTALL_PATH
+++ FC=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin/nvfortran
+++ export FC
+++ CUDA_PATH=/work/opt/local/x86_64/cores/cuda/11.4
+++ export CUDA_PATH
+++ CPATH_modshare=/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nccl/include:1:/work/opt/local/x86_64/cores/cuda/11.4/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/include:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/comm_libs/nvshmem/include:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/math_libs/include:1
+++ export CPATH_modshare
+++ OMPI_DIR=/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4
+++ export OMPI_DIR
+++ _LMFILES__modshare=/work/opt/local/modules/modulefiles/WA/aquarius/core/nvidia/22.7:1:/work/opt/local/modules/modulefiles/WA/aquarius/compiler/nvidia/22.7/ompi-cuda/4.1.4-11.4:1:/work/opt/local/modules/modulefiles/WA/aquarius/core/cuda/11.4:1
+++ export _LMFILES__modshare
+++ PATH_modshare=/usr/bin:1:/work/opt/local/x86_64/cores/cuda/11.4/nsight-systems-2021.3.2:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/cuda/bin:1:/usr/share/Modules/bin:1:/usr/local/bin:1:/work/opt/local/x86_64/cores/cuda/11.4/nsight-compute-2021.2.2:1:/pjmhome/.local/bin:1:/pjmhome/bin:1:/work/opt/local/x86_64/cores/nvidia/22.7/Linux_x86_64/22.7/compilers/bin:1:/usr/sbin:1:/work/opt/local/x86_64/cores/cuda/11.4/bin:1:/usr/local/sbin:1:/work/opt/local/x86_64/apps/nvidia/22.7/openmpi-cuda/4.1.4-11.4/bin:1
+++ export PATH_modshare
+++ test 0
++ _mlstatus=0
++ '[' -n x ']'
++ IFS=' 	
+'
++ unset _mlre _mlv _mlrv _mlIFS
++ '[' -n '' ']'
++ unset _mlshdbg
++ return 0
++ for exe in CUDA_U_f_a
++ echo CUDA_U_f_a
++ mpiexec -np 1 ./wrapper.sh ./CUDA_U_f_a
+Warning: ieee_inexact is signaling
+ * normal termination

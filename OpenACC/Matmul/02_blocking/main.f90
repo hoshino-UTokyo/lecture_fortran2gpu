@@ -45,6 +45,7 @@ contains
        end do
     end do
     !$acc end kernels
+
   end subroutine my_matmul
     
 end module test

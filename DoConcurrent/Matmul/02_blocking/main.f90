@@ -24,15 +24,16 @@ contains
     ! 上手くいくかどうかはコンパイラ次第
     !********************************************
 
-    do concurrent (i = 1:n:BLOCKX, j = 1:n:BLOCKY)
+    do concurrent (i = 1:n:BLOCKX,j = 1:n:BLOCKY)
        do k = 1, n, BLOCKX
-          do concurrent (ii = 0:BLOCKX-1, jj = 0: BLOCKY-1)
+          do concurrent (ii = 0:BLOCKX-1,jj = 0: BLOCKY-1)
              do kk = 0, BLOCKX-1
                 C(i+ii,j+jj) = C(i+ii,j+jj) + A(i+ii,k+kk) * B(k+kk,j+jj)
              end do
           end do
        end do
     end do
+    
   end subroutine my_matmul
     
 end module test
